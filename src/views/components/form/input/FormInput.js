@@ -64,9 +64,11 @@ class FormInput extends Component {
           />
         );
 
+      case 'address':
       case 'upload':
       case 'switch':
       case 'java.lang.boolean':
+      case 'payment':
         return (
           <Input
             {...this.props}
