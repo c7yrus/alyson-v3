@@ -4,6 +4,7 @@ import dlv from 'dlv';
 import copy from 'fast-copy';
 import { object, any, string } from 'prop-types';
 import { doesValueMatch } from '../../../utils/data-query/operators/find';
+import { isObject } from '../../../utils';
 import { store } from '../../../redux';
 import * as Components from '../index';
 import isObject from '../../../utils/types/object/isObject';
