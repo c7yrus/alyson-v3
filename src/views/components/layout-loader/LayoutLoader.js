@@ -119,7 +119,10 @@ Loading...
         ...currentRouteParams,
       },
       props: sublayoutProps,
+      user: data.user,
     };
+
+    console.warn({ context });
 
     const Holder = sublayout ? Box : Layout;
 
