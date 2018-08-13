@@ -7,6 +7,7 @@
     "start:web": "./node_modules/.bin/webpack-dev-server -d --config ./webpack.config.js --inline --hot --colors",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/alysonv3/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
     "build:web": "./node_modules/.bin/webpack -p --config ./webpack.config.js",
+    "serve:web": "node server.js",
     "test": "jest"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "eslint": "^5.0.1",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
+    "express": "^4.16.3",
     "fast-copy": "^1.2.1",
     "fast-xml-parser": "^3.11.1",
     "formik": "^0.11.11",
@@ -57,9 +59,12 @@
     "react-helmet": "^5.2.0",
     "react-modal": "^3.4.5",
     "react-native": "0.55.4",
+    "react-native-audio-recorder-player": "^1.2.2",
+    "react-native-audio-transcoder": "0.1.0",
     "react-native-blur": "^3.2.2",
     "react-native-code-push": "^5.4.0",
     "react-native-credit-card-input": "^0.4.1",
+    "react-native-fs": "^2.11.15",
     "react-native-gesture-handler": "^1.0.5",
     "react-native-image-picker": "^0.26.10",
     "react-native-iphone-x-helper": "^1.0.3",

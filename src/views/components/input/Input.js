@@ -17,6 +17,7 @@ import InputCurrency from './currency';
 import InputCreditCard from './credit-card';
 import InputCheckbox from './checkbox-2';
 import InputPayment from './payment';
+import AudioRecord from './audio-record';
 import SegmentedControl from './segmented-control';
 
 class Input extends Component {
@@ -57,10 +58,19 @@ class Input extends Component {
           />
         );
 
+      case 'password':
+        return (
+          <InputText
+            {...this.props}
+            type="text"
+            secureTextEntry
+            ref={input => this.input = input}
+          />
+        );
+
       case 'email':
         return (
           <InputText
-            prefixIcon="mail"
             keyboardType="email-address"
             {...this.props}
             ref={input => this.input = input}
@@ -81,7 +91,6 @@ class Input extends Component {
       case 'mobile':
         return (
           <InputText
-            prefixIcon="phone-iphone"
             keyboardType="phone-pad"
             {...this.props}
             ref={input => this.input = input}
@@ -91,7 +100,6 @@ class Input extends Component {
       case 'landline':
         return (
           <InputText
-            prefixIcon="call"
             keyboardType="phone-pad"
             {...this.props}
             ref={input => this.input = input}
@@ -256,6 +264,15 @@ class Input extends Component {
       case 'payment':
         return (
           <InputPayment
+            {...this.props}
+            ref={input => this.input = input}
+          />
+        );
+
+      case 'audioRecord':
+      case 'audiorecord':
+        return (
+          <AudioRecord
             {...this.props}
             ref={input => this.input = input}
           />
