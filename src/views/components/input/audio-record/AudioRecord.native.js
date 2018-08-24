@@ -32,12 +32,13 @@ class AudioRecord extends Component {
   onStartRecord = async () => {
     const { audioRecorderPlayer } = this.state;
     const fileName = `${RNFS.TemporaryDirectoryPath}${uuid()}.m4a`;
+
     this.setState({ fileName });
 
     audioRecorderPlayer.id = 123;
     const path = fileName;
 
-    console.warn( path )
+    console.warn( path );
 
     await audioRecorderPlayer.startRecord();
 
@@ -53,7 +54,6 @@ class AudioRecord extends Component {
       recordSecs: 0,
       recording: !state.recording,
     }));
-
 
     const path = await audioRecorderPlayer.stopRecord();
 
@@ -257,23 +257,23 @@ class AudioRecord extends Component {
           </Text>
         </Box>
         <Box
-        flexDirection="row"
-        marginTop={10}
-        alignItems="center"
-        justifyContent="space-around"
-      >
-      {
+          flexDirection="row"
+          marginTop={10}
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          {
           ( !done && processing || calculating )
             ? (
               <Box
-          flexDirection="column"
-          alignItems="center"
-          >
-            <ActivityIndicator size="large" />
-            {
-               <Box
-                  flexDirection="column"
-                  alignItems="center"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <ActivityIndicator size="large" />
+                {
+                  <Box
+                    flexDirection="column"
+                    alignItems="center"
                   >
                     { processing && (
                     <Text>
@@ -291,28 +291,28 @@ calculating score...
                     ) }
                   </Box>
             }
-          </Box>
-            )
-        : (
-          <Fragment>
-            <Touchable
-              withFeedback
-              onPress={this.handleRecord}
-            >
-              <Box
-                padding={10}
-                backgroundColor="red"
-                shape="circle"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Icon
-                  name={recording ? 'stop' : 'mic'}
-                  color="white"
-                  size="lg"
-                />
               </Box>
-            </Touchable>
+            )
+            : (
+              <Fragment>
+                <Touchable
+                  withFeedback
+                  onPress={this.handleRecord}
+                >
+                  <Box
+                    padding={10}
+                    backgroundColor="red"
+                    shape="circle"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon
+                      name={recording ? 'stop' : 'mic'}
+                      color="white"
+                      size="lg"
+                    />
+                  </Box>
+                </Touchable>
 
                 {score && (
                 <Text> 
@@ -324,29 +324,29 @@ out of 100
                 </Text>
                 ) }
 
-            <Touchable
-              withFeedback
-              onPress={this.handlePlayback}
-            >
-              <Box
-                marginLeft={10}
+                <Touchable
+                  withFeedback
+                  onPress={this.handlePlayback}
+                >
+                  <Box
+                    marginLeft={10}
                     padding={10}
-                backgroundColor="green"
-                shape="circle"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Icon
-                  name={playback ? 'pause' : 'play-arrow'}
-                  color="white"
-                  size="lg"
-                />
-              </Box>
-            </Touchable>
-          </Fragment>
-        )
+                    backgroundColor="green"
+                    shape="circle"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Icon
+                      name={playback ? 'pause' : 'play-arrow'}
+                      color="white"
+                      size="lg"
+                    />
+                  </Box>
+                </Touchable>
+              </Fragment>
+            )
       }
-      </Box>
+        </Box>
       </Box>
     );
   }
