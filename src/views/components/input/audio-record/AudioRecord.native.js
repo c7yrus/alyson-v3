@@ -58,8 +58,8 @@ class AudioRecord extends Component {
     const path = await audioRecorderPlayer.stopRecord();
 
     this.setState({
-      fileName: path
-    })
+      fileName: path,
+    });
 
     if ( path && this.props.onChangeValue ) {
       // this.props.onChangeValue( 'record.mp4' );
@@ -103,7 +103,7 @@ class AudioRecord extends Component {
     const url = config.uppy.url;
     const localFileName = this.state.fileName;
 
-    this.setState({ processing: true })
+    this.setState({ processing: true });
 
     const responseGet = await axios({
       method: 'get',
@@ -147,40 +147,38 @@ class AudioRecord extends Component {
     const resp = await axios({
       url: 'https://transcoder-eet-dev.outcome-hub.com/transcode',
       method: 'POST',
-      data: { Location }
-    })
+      data: { Location },
+    });
 
     const newURL = resp.data.Location;
-    console.warn({text: this.props.question.name})
+
+    console.warn({ text: this.props.placeholder });
 
     const transcodeResp = await axios({
       url: 'https://scoring-eet-dev.outcome-hub.com/score',
       method: 'POST',
       data: {
         url: newURL,
-        text: this.props.question.name
-      }
-    })
+        text: this.props.placeholder,
+      },
+    });
 
-
-
-    this.setState({ processing: false, calculating: true })
+    this.setState({ processing: false, calculating: true });
 
     const polling = setInterval(
       () => {
-        axios({url: `https://scoring-eet-dev.outcome-hub.com/score/${transcodeResp.data.jobID}`})
+        axios({ url: `https://scoring-eet-dev.outcome-hub.com/score/${transcodeResp.data.jobID}` })
           .then( resp => {
-            console.log(resp);
-            if (resp.data.status === "COMPLETE") {
-              clearInterval(polling);
-              console.log(resp.data);
-              this.setState({score: resp.data.score, processing: false, calculating: false, done: true})
+            console.log( resp );
+            if ( resp.data.status === 'COMPLETE' ) {
+              clearInterval( polling );
+              console.log( resp.data );
+              this.setState({ score: resp.data.score, processing: false, calculating: false, done: true });
               this.props.onChangeValue( newURL );
             }
-          })
+          });
       }, 1000
-    )
-
+    );
 
     // const { name, fileType } = jsonObj._parts.filter( field => field[0] === 'file' )[0][1];
 
@@ -247,14 +245,27 @@ class AudioRecord extends Component {
 
     return (
       <Box
+        flexDirection="column"
+      >
+        <Box
+          marginY={20}
+        >
+          <Text
+            align="center"
+          >
+            {this.props.placeholder}
+          </Text>
+        </Box>
+        <Box
         flexDirection="row"
         marginTop={10}
         alignItems="center"
         justifyContent="space-around"
       >
       {
-        ( !done && processing || calculating)
-        ? <Box
+          ( !done && processing || calculating )
+            ? (
+              <Box
           flexDirection="column"
           alignItems="center"
           >
@@ -264,11 +275,24 @@ class AudioRecord extends Component {
                   flexDirection="column"
                   alignItems="center"
                   >
-                  { processing && <Text> processing... </Text> }
-                  { calculating && <Text> calculating score... </Text> }
+                    { processing && (
+                    <Text>
+                      {' '}
+processing...
+                      {' '}
+                    </Text>
+                    ) }
+                    { calculating && (
+                    <Text>
+                      {' '}
+calculating score...
+                      {' '}
+                    </Text>
+                    ) }
                   </Box>
             }
           </Box>
+            )
         : (
           <Fragment>
             <Touchable
@@ -290,7 +314,15 @@ class AudioRecord extends Component {
               </Box>
             </Touchable>
 
-              {score && <Text> {score} out of 100 </Text> }
+                {score && (
+                <Text> 
+                  {' '}
+                  {score}
+                  {' '}
+out of 100
+                  {' '}
+                </Text>
+                ) }
 
             <Touchable
               withFeedback
@@ -298,6 +330,7 @@ class AudioRecord extends Component {
             >
               <Box
                 marginLeft={10}
+                    padding={10}
                 backgroundColor="green"
                 shape="circle"
                 alignItems="center"
@@ -313,6 +346,7 @@ class AudioRecord extends Component {
           </Fragment>
         )
       }
+      </Box>
       </Box>
     );
   }
