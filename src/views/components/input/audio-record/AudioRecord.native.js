@@ -298,7 +298,6 @@ class AudioRecord extends Component {
             >
               <Box
                 marginLeft={10}
-                padding={10}
                 backgroundColor="green"
                 shape="circle"
                 alignItems="center"
