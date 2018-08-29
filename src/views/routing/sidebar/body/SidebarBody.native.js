@@ -62,16 +62,8 @@ class Sidebar extends Component {
                     ? ( 
                       <Box
                         marginBottom={20}
+                        height={200}
                       >
-                        <Image
-                          style={{
-                            resizeMode: 'contain',
-                            width: '100%',
-                            height: 200,
-                          }}
-                          flex={1}
-                          source={{ uri: headerImage }}
-                        />
                       </Box>
                     )
                     : null
